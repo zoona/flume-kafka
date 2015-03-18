@@ -80,13 +80,11 @@ bin/kafka-console-producer.sh \
 ### create with replication num 2
 
 ```bash
-$
 ```
 
 ### create with partition num 3
 
 ```bash
-$
 ```
 
 ### config 수정
@@ -129,7 +127,10 @@ bin/kafka-topics.sh \
 ### describe topic
 
 ```bash
-bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+bin/kafka-topics.sh \
+  --describe \
+  --zookeeper localhost:2181 \
+  --topic my-replicated-topic
 ```
 
 ## 5. falut-tolerance
@@ -145,13 +146,19 @@ kill `process id`
 ### describe topic
 
 ```bash
-bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+bin/kafka-topics.sh \
+  --describe \
+  --zookeeper localhost:2181 \
+  --topic my-replicated-topic
 ```
 
 ### consume
 
 ```bash
-bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-replicated-topic
+bin/kafka-console-consumer.sh \
+  --zookeeper localhost:2181 \
+  --topic my-replicated-topic \
+  --from-beginning
 ```
 
 ## 6. Monitoring
@@ -161,7 +168,8 @@ bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topi
 ConsumerOffsetChecker
 
 ```bash
-bin/kafka-run-class.sh kafka.tools.ConsumerOffsetChecker \
+bin/kafka-run-class.sh \
+  kafka.tools.ConsumerOffsetChecker \
   --broker-info localhost:9092 \
   --zookeeper localhost:2181 \
   --group `group name`
@@ -170,7 +178,8 @@ bin/kafka-run-class.sh kafka.tools.ConsumerOffsetChecker \
 GetOffsetShell
 
 ```bash
-bin/kafka-run-class.sh kafka.tools.GetOffsetShell \
+bin/kafka-run-class.sh \
+  kafka.tools.GetOffsetShell \
   --broker-list localhost:9092 \
   --topic test \
   --time -2
@@ -179,7 +188,8 @@ bin/kafka-run-class.sh kafka.tools.GetOffsetShell \
 SimpleConsumerShell
 
 ```bash
-bin/kafka-run-class.sh kafka.tools.SimpleConsumerShell \
+bin/kafka-run-class.sh \
+  kafka.tools.SimpleConsumerShell \
   --broker-list localhost:9092 \
   --topic test \
   --partition 0
@@ -205,6 +215,7 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
   --refresh 10.seconds \
   --retain 6.hours
 ```
+----
 
 # Flume Practice
 
