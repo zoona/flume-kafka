@@ -99,18 +99,20 @@ config/server-1.properties:
     broker.id=1
     port=9093
     log.dir=/tmp/kafka-logs-1
+    zookeeper.connect=localhost:2181
 
 config/server-2.properties:
     broker.id=2
     port=9094
     log.dir=/tmp/kafka-logs-2
+    zookeeper.connect=localhost:2181
 ```
 
 ### start node
 
 ```
 bin/kafka-server-start.sh config/server-1.properties
-bin/kafka-server-start.sh config/server-1.properties
+bin/kafka-server-start.sh config/server-2.properties
 ```
 
 ### create topic
