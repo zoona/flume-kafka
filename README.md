@@ -4,13 +4,13 @@
 
 ### 다운로드
 ```bash
-wget http://mirror.apache-kr.org/kafka/0.8.2.0/kafka_2.10-0.8.2.0.tgz
+wget http://apache.tt.co.kr/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
 ```
 
 ### 압축해제
 ```bash
-tar -xzf kafka_2.10-0.8.2.0.tgz
-cd kafka_2.10-0.8.2.0
+tar -xvzf kafka_2.10-0.8.2.1.tgz
+cd kafka_2.10-0.8.2.1
 ```
 
 ### zookeeper 실행
@@ -75,17 +75,19 @@ bin/kafka-console-producer.sh \
   --topic test
 ```
 
-## 5. Multi Broker
-
 ### create with replication num 2
 
 ```bash
+
 ```
 
 ### create with partition num 3
 
 ```bash
+
 ```
+
+## 5. Multi Broker
 
 ### config 수정
 
@@ -135,7 +137,7 @@ bin/kafka-topics.sh \
   --topic my-replicated-topic
 ```
 
-## 5. falut-tolerance
+## 5. fault-tolerance
 
 ### kill process
 
@@ -226,7 +228,7 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
 ### 다운로드
 
 ```bash
-wget http://mirror.apache-kr.org/flume/1.5.2/apache-flume-1.5.2-bin.tar.gz
+wget http://apache.tt.co.kr/flume/1.6.0/apache-flume-1.6.0-bin.tar.gz
 ```
 
 ### 압축해제
@@ -362,4 +364,107 @@ echo hello >> /tmp/buffer
 hadoop fs -ls /flume
 hadoop fs -ls /flume/'directory name'
 hadoop fs -cat /flume/'directory name'/'file name'
+```
+
+# Storm
+
+## Storm 설치
+
+### 다운로드
+```bash
+wget http://apache.tt.co.kr/storm/apache-storm-0.10.0-beta1/apache-storm-0.10.0-beta1.tar.gz
+```
+
+### 압축해제
+```bash
+tar -xvzf apache-storm-0.10.0-beta1.tar.gz
+cd apache-storm-0.10.0-beta1
+```
+
+### yaml 수정
+
+```bash
+cd conf
+vi storm.yaml
+```
+
+```yaml
+########### These MUST be filled in for a storm configuration
+storm.zookeeper.servers:
+    - "localhost"
+#     - "server2"
+#
+nimbus.host: "localhost"
+#
+#
+```
+
+### Nimbus, UI 실행
+
+```bash
+# on master
+bin/storm nimbus
+bin/storm ui
+```
+
+### Supervisor 실행
+
+```bash
+# on slave
+bin/storm Supervisor
+```
+
+### WebUI
+
+```bash
+# on browser
+http://localhost:8080
+```
+
+
+# Redis
+
+## Redis 설치
+
+### 다운로드
+
+```bash
+wget http://download.redis.io/releases/redis-3.0.3.tar.gz
+```
+
+### 압축해제
+
+```bash
+tar xvfz redis-3.0.3.tar.gz
+```
+
+### 컴파일
+
+```bash
+cd redis-3.0.3
+```
+
+```bash
+make
+```
+### conf 수정
+
+```bash
+################################ GENERAL  #####################################
+
+# By default Redis does not run as a daemon. Use 'yes' if you need it.
+# Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+daemonize yes
+```
+
+### server 실행
+
+```bash
+src/redis-server redis.conf
+```
+
+### client 실행
+
+```bash
+src/redis-cli
 ```
