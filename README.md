@@ -12,7 +12,7 @@ wget http://apache.tt.co.kr/flume/1.6.0/apache-flume-1.6.0-bin.tar.gz
 ### 압축해제
 
 ```bash
-tar xvfz apache-flume-1.5.2-bin.tar.gz
+tar xvfz apache-flume-1.6.0-bin.tar.gz
 ```
 
 ## 2. Agent Configuration
@@ -52,7 +52,7 @@ agent 실행
 
 ```bash
 bin/flume-ng agent \
-  --conf-file=ex01.conf \
+  --conf-file=case01.conf \
   --name agent
 ```
 
@@ -85,7 +85,7 @@ cat /tmp/fileroll/`filename`
 - hdfs에 저장
 
 ```
-#ex02
+# case02.conf
 agent.sources = execSource
 agent.channels = fileChannel
 agent.sinks = hdfsSink
@@ -98,7 +98,7 @@ agent.sources.execSource.interceptors = timestampInterceptor
 agent.sources.execSource.interceptors.timestampInterceptor.type = timestamp
 
 agent.sinks.hdfsSink.type = hdfs
-agent.sinks.hdfsSink.hdfs.path = hdfs://bigdata20-02/flume/%Y%m%d-%H%M%S
+agent.sinks.hdfsSink.hdfs.path = hdfs://Tom:9000/flume/%Y%m%d-%H%M%S
 agent.sinks.hdfsSink.hdfs.fileType = DataStream
 agent.sinks.hdfsSink.hdfs.writeFormat = Text
 agent.sinks.hdfsSink.channel = fileChannel
@@ -111,7 +111,7 @@ agent.channels.fileChannel.dataDirs = /tmp/flume/data
 버퍼 파일 생성
 
 ```bash
-touch buffer
+touch /tmp/buffer
 ```
 
 hdfs 디렉토리 생성
@@ -126,7 +126,7 @@ agent 실행
 
 ```bash
 bin/flume-ng agent \
-  --conf-file=ex02.conf \
+  --conf-file=case02.conf \
   --name agent
 ```
 
@@ -151,13 +151,13 @@ hadoop fs -cat /flume/'directory name'/'file name'
 
 ### 다운로드
 ```bash
-wget http://apache.tt.co.kr/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
+wget http://apache.tt.co.kr/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz
 ```
 
 ### 압축해제
 ```bash
-tar -xvzf kafka_2.10-0.8.2.1.tgz
-cd kafka_2.10-0.8.2.1
+tar -xvzf kafka_2.10-0.8.2.2.tgz
+cd kafka_2.10-0.8.2.2
 ```
 
 ### zookeeper 실행
